@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn@latest add https://ui.shadcn.com/r/themes/blue.json --overwrite -y)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebSearch",
+      "Bash(npm install *)"
+    ]
+  }
+}
