@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 鍵貸与管理システム
 
-## Getting Started
+部署の鍵の貸出・返却を管理する社内向け Web アプリ。
 
-First, run the development server:
+## 技術スタック
+
+- **Next.js** (App Router) / **TypeScript**
+- **PostgreSQL** + **Drizzle ORM**
+- **Better Auth** (認証)
+- **Tailwind CSS** + shadcn/ui
+
+## 開発環境構築
+
+### 前提条件
+
+- Node.js 20+
+- Docker
+
+### 手順
 
 ```bash
+# 1. 依存関係インストール
+npm install
+
+# 2. 環境変数を設定
+cp .env.example .env
+# DATABASE_URL と BETTER_AUTH_SECRET を編集
+
+# 3. DB 起動
+docker compose up -d
+
+# 4. マイグレーション & シードデータ投入
+npm run db:migrate
+npm run db:seed
+
+# 5. 開発サーバー起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+→ http://localhost:4000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 環境変数
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| 変数                 | 説明                                                 |
+| -------------------- | ---------------------------------------------------- |
+| `DATABASE_URL`       | PostgreSQL 接続文字列                                |
+| `BETTER_AUTH_SECRET` | 認証シークレット（`openssl rand -base64 32` で生成） |
+| `BETTER_AUTH_URL`    | アプリの URL（開発時は `http://localhost:4000`）     |
 
-## Learn More
+## 主なコマンド
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev          # 開発サーバー
+npm run build        # ビルド
+npm run lint         # lint チェック
+npm run fix          # lint 自動修正
+npm run db:generate  # マイグレーションファイル生成
+npm run db:migrate   # マイグレーション適用
+npm run db:studio    # Drizzle Studio（DB GUI）
+```
