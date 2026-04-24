@@ -1,6 +1,9 @@
 ﻿"use client";
 
-import { confirmReturnAction, type KeyActionState } from "@/app/actions/keys";
+import {
+  confirmReturnAction,
+  type KeyActionState,
+} from "@/app/actions/borrowings";
 import { Button } from "@/client/components/ui/button";
 import {
   Dialog,

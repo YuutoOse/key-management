@@ -1,7 +1,8 @@
-﻿import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { queryBorrowings, queryKeys } from "@/app/queries/keys";
+import { headers } from "next/headers";
+import { queryBorrowings } from "@/app/queries/borrowings";
+import { queryKeys } from "@/app/queries/keys";
 import { KeysDashboard } from "@/client/components/features/keys/keys-dashboard";
+import { PageShell } from "@/client/components/layout/page-shell";
 import type { BorrowingStatus } from "@/server/domain/borrowings/entity";
 import { auth } from "@/server/lib/auth";
 
@@ -12,8 +13,8 @@ const MainPage = async ({ searchParams }: { searchParams: SearchParams }) => {
     auth.api.getSession({ headers: await headers() }),
     searchParams,
   ]);
-  if (!session) redirect("/login");
 
+  const userRole = session?.user.role === "admin" ? "admin" : "user";
   const keyId = typeof params.keyId === "string" ? params.keyId : undefined;
   const status =
     typeof params.status === "string"
@@ -26,13 +27,15 @@ const MainPage = async ({ searchParams }: { searchParams: SearchParams }) => {
   ]);
 
   return (
-    <KeysDashboard
-      keys={keys}
-      borrowings={borrowings}
-      currentUserId={session.user.id}
-      keyFilter={keyId ?? "all"}
-      statusFilter={status ?? "all"}
-    />
+    <PageShell userName={session?.user.name ?? ""} userRole={userRole}>
+      <KeysDashboard
+        keys={keys}
+        borrowings={borrowings}
+        currentUserId={session?.user.id ?? ""}
+        keyFilter={keyId ?? "all"}
+        statusFilter={status ?? "all"}
+      />
+    </PageShell>
   );
 };
 

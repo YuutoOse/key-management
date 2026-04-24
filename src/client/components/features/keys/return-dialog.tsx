@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { type KeyActionState, returnKeysAction } from "@/app/actions/keys";
+import { type KeyActionState, returnKeysAction } from "@/app/actions/borrowings";
 import { Button } from "@/client/components/ui/button";
 import { Checkbox } from "@/client/components/ui/checkbox";
 import {

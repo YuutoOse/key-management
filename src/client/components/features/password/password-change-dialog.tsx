@@ -2,7 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { useActionState } from "react";
-import { changePasswordAction } from "@/app/actions/password";
+import { changePasswordAction } from "@/app/actions/users/account";
 import { Alert, AlertDescription } from "@/client/components/ui/alert";
 import { Button } from "@/client/components/ui/button";
 import {

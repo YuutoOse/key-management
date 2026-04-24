@@ -1,5 +1,11 @@
 import type { z } from "zod";
 
+export type FlatActionState = {
+  errors: string[] | null;
+  message?: string;
+  success: boolean;
+};
+
 export type ActionState<S extends z.ZodObject<z.ZodRawShape>> = {
   values?: Partial<{ [K in keyof z.infer<S>]: string }>;
   errors: null | { [K in keyof z.infer<S>]?: string[] };

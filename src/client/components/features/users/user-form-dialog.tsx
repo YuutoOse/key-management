@@ -6,7 +6,7 @@ import {
   createUserAction,
   deleteUserAction,
   updateUserAction,
-} from "@/app/actions/users";
+} from "@/app/actions/users/management";
 import { Alert, AlertDescription } from "@/client/components/ui/alert";
 import { Button } from "@/client/components/ui/button";
 import {
